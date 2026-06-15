@@ -83,7 +83,7 @@ func main() {
 		dir = wd
 	}
 
-	fmt.Println("---------------------------------")
+	fmt.Println("------------------------------------------------------------------")
 
 	files, err := rootFiles(dir)
 	if err != nil {
@@ -122,7 +122,6 @@ func main() {
 		fmt.Printf("%-50s: %d lines\n", rel, lines)
 	}
 
-	fmt.Println("---------------------------------")
-	fmt.Print("\n\n\n")
+	fmt.Print("------------------------------------------------------------------\n\n")
 	fmt.Println("TOTAL LINES:", linesTotal)
 }
