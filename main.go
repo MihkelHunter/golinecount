@@ -13,15 +13,20 @@ func rootFiles(root string) ([]string, error) {
 	var files []string
 
 	skipExt := map[string]struct{}{
-		".json": {},
-		".md":   {},
-		".txt":  {},
-		".mod":  {},
+		".json":      {},
+		".md":        {},
+		".txt":       {},
+		".mod":       {},
+		".gitignore": {},
 	}
 
 	err := filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
+		}
+
+		if d.Name() == ".git" && d.IsDir() {
+			return filepath.SkipDir
 		}
 
 		if d.IsDir() {
