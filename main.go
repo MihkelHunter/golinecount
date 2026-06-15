@@ -48,10 +48,6 @@ func rootFiles(root string) ([]string, error) {
 			return filepath.SkipDir
 		}
 
-		if d.Name() == ".git" && d.IsDir() {
-			return filepath.SkipDir
-		}
-
 		if d.IsDir() {
 			return nil
 		}
@@ -118,7 +114,12 @@ func main() {
 			continue
 		}
 		linesTotal = linesTotal + lines
-		fmt.Printf("%-20s: %d lines\n", filepath.Base(file), lines)
+
+		rel, err := filepath.Rel(dir, file)
+		if err != nil {
+			rel = file
+		}
+		fmt.Printf("%-50s: %d lines\n", rel, lines)
 	}
 
 	fmt.Println("---------------------------------")
