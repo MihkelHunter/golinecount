@@ -43,7 +43,7 @@ func rootFiles(root string) ([]string, error) {
 }
 
 func main() {
-	root := flag.String("dir", "dir", "Add full directory to file")
+	root := flag.String("dir", "dir", "Add full directory to files")
 	useCwd := flag.Bool("cwd", false, "Use current working directory as root")
 	flag.Parse()
 
