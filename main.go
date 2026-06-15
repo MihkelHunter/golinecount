@@ -17,12 +17,35 @@ func rootFiles(root string) ([]string, error) {
 		".md":        {},
 		".txt":       {},
 		".mod":       {},
+		".sum":       {},
 		".gitignore": {},
+		".xml":       {},
+		".png":       {},
+		".jpg":       {},
+		".xlsx":      {},
+		".xls":       {},
+		".exe":       {},
+		".pdf":       {},
+		".csv":       {},
+		".log":       {},
+		".JPG":       {},
+		".db":        {},
+		".ttf":       {},
+	}
+
+	skipDir := map[string]struct{}{
+		".git":    {},
+		"GOBUILD": {},
+		"vendor":  {},
 	}
 
 	err := filepath.WalkDir(root, func(path string, d fs.DirEntry, err error) error {
 		if err != nil {
 			return err
+		}
+
+		if _, skip := skipDir[d.Name()]; skip {
+			return filepath.SkipDir
 		}
 
 		if d.Name() == ".git" && d.IsDir() {
@@ -53,6 +76,7 @@ func main() {
 	flag.Parse()
 
 	dir := *root
+	linesTotal := 0
 
 	if *useCwd {
 		wd, err := os.Getwd()
@@ -93,9 +117,11 @@ func main() {
 			fmt.Printf("Error reading %s: %v\n", file, err)
 			continue
 		}
-
+		linesTotal = linesTotal + lines
 		fmt.Printf("%-20s: %d lines\n", filepath.Base(file), lines)
 	}
 
 	fmt.Println("---------------------------------")
+	fmt.Print("\n\n\n")
+	fmt.Println("TOTAL LINES:", linesTotal)
 }
