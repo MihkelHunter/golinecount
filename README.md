@@ -1,6 +1,6 @@
 ### Example:
-go run main.go --dir "C:\Users\asd\asd\GO\golinecount\"
-go run main.go -cwd 1
+- go run main.go --dir "C:\Users\asd\asd\GO\golinecount\"
+- go run main.go -cwd 1
 
 ### Flags:
 	- dir "Add full directory to files"
